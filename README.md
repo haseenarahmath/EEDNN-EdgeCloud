@@ -8,6 +8,19 @@ An adaptive inference platform that executes **Early-Exit Deep Neural Networks (
 > *ICDAM 2022 (Springer Nature, 2023)* — [DOI: 10.1007/978-981-19-7615-5_5](https://doi.org/10.1007/978-981-19-7615-5_5)
 
 ---
+## 🎥 Demo Video
+
+Experience how **EEDNN-EdgeCloud** enables adaptive inference across edge and cloud environments — combining real-time image recognition, early-exit control, and performance visualization.
+The video demonstrates how users can:
+
+* Upload images and view **exit-wise predictions** and confidence levels
+* Dynamically adjust **thresholds and branch depths** to explore accuracy–latency trade-offs
+* Compare **training strategies** and inference behaviors through **interactive charts** powered by *Chart.js* and *D3.js*
+
+[![EEDNN-EdgeCloud Demo](https://img.youtube.com/vi/rkwtwHcaorE/hqdefault.jpg)](https://youtu.be/rkwtwHcaorE)
+
+> 📺 Click the image above to watch the full demo on YouTube.
+
 
 ## 🚀 Overview
 This system demonstrates how **early-exit policies** balance *accuracy* and *latency* in deep neural networks.  
@@ -103,7 +116,7 @@ Explore the interactive dashboard in action — upload images, adjust thresholds
 ---
 
 
-** Inference Analysis - Citation**
+**Inference Analysis - Citation**
 
 ```
 Haseena Rahmath P., Vishal Srivastava, and Kuldeep Chaurasia.
