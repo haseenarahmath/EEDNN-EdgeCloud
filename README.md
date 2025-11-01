@@ -90,7 +90,20 @@ By default, the app runs on:
 This project extends the ICDAM 2022 early-exit study into a **deployable edge–cloud system** using Flask.
 It enables real-time visualization of the accuracy–latency trade-off, making it an ideal platform for understanding adaptive, efficient inference pipelines in deep learning systems.
 
-**Citation**
+---
+
+## 🎬 Demo Preview
+
+<video src="https://github.com/<your-username>/EEDNN-EdgeCloud/assets/12345678/demo.mp4" width="800" controls>
+Your browser does not support the video tag.
+</video>
+
+Explore the interactive dashboard in action — upload images, adjust thresholds, branches, and datasets, and observe the real-time accuracy–latency trade-offs across edge and cloud inference.
+
+---
+
+
+** Inference Analysis - Citation**
 
 ```
 Haseena Rahmath P., Vishal Srivastava, and Kuldeep Chaurasia.
