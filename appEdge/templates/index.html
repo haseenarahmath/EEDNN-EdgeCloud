@@ -1,0 +1,22 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 style="color:#090944;">Hi, Everyone!</h1>
+<div style="text-align:center;font-size:30px;color:#090944;"><p>Welcome to the project<b> Early Exit DNN Analysis!!!</b></p></div>
+    <ul class="intro"><li>Among various machine learning algorithms,
+        deep learning has proved its remarkable capabilities in data processing and analysis.</li>
+        <li>With more complex network layers, DNN can extract more features, but at the cost
+        of increased latency and energy consumption during the inference process.</li>
+        <li>For a real-time application with energy and resource-constrained devices, inferring result from a
+        complex and large DNN is really a challenging task.</li>
+        <li>Creating branches and introducing early exit points can reduce inference time and thereby energy
+        consumption while meeting the desired accuracy.</li>
+        <li style="font-weight:bold">The Objective of the project is to analyze the behavior
+            of branchy deep learning neural
+            networks with respect to exit points, threshold, and branching.</li>
+</ul>
+<div class="intro1"><img height="400px" src="{{ url_for('static', filename = 'dnn.png') }}"></div>
+
+
+{% endblock %}

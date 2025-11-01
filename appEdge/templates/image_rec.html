@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h1>Image Recognition</h1>
+    <form action="" method="post" enctype = "multipart/form-data">
+        {{ form.hidden_tag() }}
+        <p>
+            Choose a Threshold
+            <SELECT name="threshold">
+            {% for d in threshold %}
+	                <OPTION value={{d}}>{{d}}</option>
+            {% endfor %}
+            </SELECT>
+
+        </p>
+        <p>
+            Number of branches
+            <SELECT name="branches">
+            {% for k in branches %}
+	                <OPTION value={{k}}>{{k}}</option>
+            {% endfor %}
+            </SELECT>
+
+        </p>
+        <p>
+            Upload Image
+            <input  type = "file" name = "file" />
+
+        </p>
+        <p></p>
+
+        <p>{{ form.submit() }}</p>
+    </form>
+</div>
+<div>
+    {% if result %}
+    <h1> Result</h1>
+    <table class="container1">
+        <tr>
+            <th>Inference time:</th>
+            <td>{{result["inference_time"]}}  seconds</td>
+        </tr>
+        <tr>
+            <th>Category:</th>
+            <td>{{result["categories"]}}</td>
+        </tr>
+        <tr>
+            <th>Confidence:</th>
+            <td>{{result["conf_list"]}}</td>
+        </tr>
+        <tr>
+            <th>Base Threshold:</th>
+            <td>{{result["threshold"]}}</td>
+        </tr>
+        <tr>
+            <th>Branches Chosen:</th>
+            <td>{{result["branch"]}}</td>
+        </tr>
+        <tr>
+            <th>Is Inference Finished:</th>
+            <td>{{result["isTerminate"]}}</td>
+        </tr>
+
+
+
+    </table>
+
+    {% endif%}
+</div>
+{% endblock %}

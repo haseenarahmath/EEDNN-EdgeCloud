@@ -1,0 +1,88 @@
+<script src="{{ url_for('static', filename = 'utility.js') }}"></script>
+<script src="{{ url_for('static', filename = 'plotting.js') }}"></script>
+<script src="{{ url_for('static', filename = 'Chart.min.js') }}"></script>
+<script src="{{ url_for('static', filename = 'd3.v7.min.js') }}"></script>
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h2 style="text-align:center">Analysis</h2>
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            Choose a Dataset
+            <SELECT name="dataset">
+            {% for d in datasets %}
+                {% for k,v in d.items() %}
+	                <OPTION value={{k}}>{{v}}</option>
+                {% endfor %}
+            {% endfor %}
+            </SELECT>
+
+
+        </p>
+        <p>
+            Choose Model
+            <SELECT name="model">
+            {% for d in models %}
+                {% for k,v in d.items() %}
+	                <OPTION value={{k}}>{{v}}</option>
+                {% endfor %}
+            {% endfor %}
+            </SELECT>
+        </p>
+        <p>
+            Choose a Threshold
+            <SELECT name="threshold">
+                <OPTION value=-1>Please Select</option>
+            {% for d in thresholds %}
+	                <OPTION value={{d}}>{{d}}</option>
+            {% endfor %}
+            </SELECT>
+
+        </p>
+
+       <p>
+            Number of branches
+            <SELECT name="branches">
+                 <OPTION value=-1>Please Select</option>
+            {% for k in branches %}
+	                <OPTION value={{k}}>{{k}}</option>
+            {% endfor %}
+            </SELECT>
+
+        </p>
+        <p>Choose a Chart Type:</p>
+        <div style="font-size:15.5px">
+        <p><input type="radio" name="chart_type" value="lac">Branch-wise Latency with Accuracy & Threshold</p>
+        <p><input type="radio" name="chart_type" value="lbc">Overall Processing-time in Each Branch</p>
+        <p><input type="radio" name="chart_type" value="oic"> Overall Branch-wise Latency with Threshold</p>
+        <p><input type="radio" name="chart_type" value="mlt">Overall Processing-time in terms of Threshold</p>
+        </div>
+            <p>{{ form.submit() }}</p>
+    </form>
+</div>
+
+    {% if path %}
+<div class="container3">
+    <div id="loader" style="display:none"><img height="400px" src="{{ url_for('static', filename = 'loading.gif') }}"></div>
+    <div id="chart-container" class="chart-container">
+    <canvas id="myChart" width="600" height="300"></canvas>
+    </div>
+    <div id="analysis" class="analysis" style="display:none">
+        <h2 id="conHead">Observation</h2>
+        <div id="conclusion" >
+        </div>
+    </div>
+</div>
+
+
+<script>
+type='{{form_values.chart_type}}'
+threshold={{form_values.threshold}}
+branch={{form_values.branch}}
+thresholds={{thresholds}}
+branches={{branches}}
+d3.csv('{{ url_for('static', filename = 'results/'+path) }}').then(draw_chart);
+</script>
+{% endif %}
+{% endblock %}

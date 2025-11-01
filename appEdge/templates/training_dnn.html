@@ -1,0 +1,110 @@
+<script src="{{ url_for('static', filename = 'utility.js') }}"></script>
+<script src="{{ url_for('static', filename = 'plotting.js') }}"></script>
+<script src="{{ url_for('static', filename = 'Chart.min.js') }}"></script>
+<script src="{{ url_for('static', filename = 'd3.v7.min.js') }}"></script>
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h2 style="text-align:center">Training Strategy - Analysis</h2>
+    <form action="" method="post" onsubmit="return validate()">
+        {{ form.hidden_tag() }}
+        <p>Choose a Chart Type:</p>
+            <SELECT name="chart_type" id="chart_typeID" onclick="enableFields(this.value)">
+                <OPTION value='ttt'>Training Time Vs Training Type </option>
+                <OPTION value='tta'>Accuracy Vs Training Type</option>
+                <OPTION value='ave'>Accuracy Vs Epochs</option>
+                <OPTION value='tte'>Training Time Vs Epochs</option>
+                <OPTION value='ttx'>Training Time Vs Exit Branch</option>
+                <OPTION value='aex'>Accuracy Vs Exit Branch</option>
+
+            </SELECT>
+
+
+        </p>
+         <p>
+            Choose Model
+            <SELECT name="model" id="modelID">
+            {% for d in models %}
+                {% for k,v in d.items() %}
+	                <OPTION value='{{k}}'>{{v}}</option>
+                {% endfor %}
+            {% endfor %}
+            </SELECT>
+        </p>
+
+        <p>
+            Choose a Dataset
+            <SELECT name="dataset" id="datasetID">
+            {% for d in datasets %}
+                {% for k,v in d.items() %}
+	                <OPTION value='{{k}}'>{{v}}</option>
+                {% endfor %}
+            {% endfor %}
+            </SELECT>
+            <script>document.getElementById("datasetID").value="cifar10" </script>
+
+        </p>
+        <p>
+            Choose a Training Type
+            <SELECT name="training_type" id="training_typeID" disabled="true">
+                <OPTION value=-1>Please Select</option>
+            {% for d in training_type %}
+                {% for k,v in d.items() %}
+	                <OPTION value={{k}}>{{v}}</option>
+                {% endfor %}
+            {% endfor %}
+            </SELECT>
+
+        </p>
+
+
+       <p>
+            Number of branches
+            <SELECT name="branches" id="branchesID" disabled="true">
+                 <OPTION value=-1>Please Select</option>
+            {% for k in branches %}
+	                <OPTION value={{k}}>{{k}}</option>
+            {% endfor %}
+            </SELECT>
+
+        </p>
+
+
+            <p>{{ form.submit() }}</p>
+    </form>
+</div>
+
+    {% if path %}
+<div class="container3">
+    <div id="loader" style="display:none"><img height="400px" src="{{ url_for('static', filename = 'loading.gif') }}"></div>
+    <div id="chart-container" class="chart-container">
+    <canvas id="myChart" width="600" height="300"></canvas>
+    </div>
+    <div id="analysis" class="analysis" style="display:none">
+        <h2 id="conHead">Observation</h2>
+        <div id="conclusion" >
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+type='{{form_values.chart_type}}'
+training_type='{{form_values.training_type}}'
+branch={{ form_values.branch }}
+training_types={{training_type_x}}
+branches_data={{branches}}
+
+epochs_data={{epochs}}
+model='{{form_values.model}}'
+BRANCHES_PER_MODEL= JSON.parse('{{BRANCHES_PER_MODEL | tojson}}')
+d3.csv('{{ url_for('static',  filename = 'results/'+path)}}').then(draw_chart_training);
+document.getElementById("modelID").value=model
+document.getElementById("chart_typeID").value=type
+enableFields(type,branch,training_type)
+//enableflds(branch,training_type,type)
+</script>
+{% endif %}
+{% endblock %}
+

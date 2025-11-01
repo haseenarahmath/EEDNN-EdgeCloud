@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+    <head>
+        <link rel="stylesheet" href="{{ url_for('static', filename = 'utility.css') }}">
+        {% if title %}
+        <title>{{ title }} - Project</title>
+        {% else %}
+        <title>Project</title>
+        {% endif %}
+
+    </head>
+    <body>
+    <div class="header-glassic"></div>
+        <div>
+<h3> <div class="nav">
+    <span class="logo_nav">
+        <img class="logo" src="{{ url_for('static', filename = 'logo.png') }}"/>
+    </span>
+            <a href="{{ url_for('index') }}">Home</a>
+        {% if current_user.is_anonymous %}
+        <a href="{{ url_for('login') }}">Login</a>
+        {% else %}
+            <a href="{{ url_for('dnn')}}">Inference Analysis</a>
+            <a href="{{ url_for('training')}}">Training Analysis</a>
+            <a href="{{ url_for('image_rec')}}">Image Recognition</a>
+            <!--<a href="{{ url_for('assignment')}}">Assignment</a>-->
+        <a href="{{ url_for('logout') }}">Logout</a>
+        {% endif %}
+    </div>
+        </h3>
+    </div>
+        <hr>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        <div class="container0">
+        {% block content %}{% endblock %}
+        </div>
+    </body>
+</html>
+
+
+

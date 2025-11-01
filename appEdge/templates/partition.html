@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h2>Assignment Implementation</h2>
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            <label>Latency Requirement</label>
+            {{ form.latency(size=32) }}<br>
+            {% for error in form.latency.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            <label>Select Algorithm</label>
+            <p><input type="radio" name="alg_type" value="a1">Brute Force</p>
+            <p><input type="radio" name="alg_type" value="a2">Dynamic</p>
+
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+</div>
+<div>
+    {% if result %}
+    {% if exit_p %}
+    <h1> Result</h1>
+    <table class="container1">
+        <tr>
+            <th>Exit Point:</th>
+            <td>{{exit_p}}</td>
+        </tr>
+        <tr>
+            <th>Partition:</th>
+            <td>{{partition}}</td>
+        </tr>
+        <tr>
+            <th>Latency:</th>
+            <td>{{latency}} s</td>
+        </tr>
+        <tr>
+            <th>Time:</th>
+            <td>{{inf}} s</td>
+        </tr>
+
+    </table>
+    {% else %}
+    <div class="noopt"> No Optimal Exit Point for the given latency</div>
+
+    {% endif%}
+{% endif%}
+</div>
+
+{% endblock %}

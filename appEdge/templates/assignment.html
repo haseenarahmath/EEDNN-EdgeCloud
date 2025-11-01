@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+ <h1 style="color:#090944;">Hi, Everyone!</h1>
+<div style="text-align:center;font-size:30px;color:#090944;"><p><b>Assignment Implementation</b></p></div>
+
+<div>
+    How to make a joint optimization on DNN partitioning and DNN right-sizing in order to
+maximize the inference accuracy without violating the pre-defined latency requirement.
+</div>
+<br/>
+
+<div class="button"><a href="{{ url_for('partition') }}">Execute</a> </div>
+<br/>
+<div class="intro1"><img height="400px" src="{{ url_for('static', filename = 'algo1.png') }}"></div>
+<div class="intro1"><img height="400px" src="{{ url_for('static', filename = 'algo2.png') }}"></div>
+
+
+
+{% endblock %}
